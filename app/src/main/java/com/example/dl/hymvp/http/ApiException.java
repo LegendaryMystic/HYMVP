@@ -6,7 +6,6 @@ import com.google.gson.JsonSerializer;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.json.JSONException;
 
-import java.io.IOException;
 import java.io.NotSerializableException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -15,13 +14,22 @@ import java.text.ParseException;
 
 import retrofit2.HttpException;
 
-/**
- * @author Allen
- *         Created by Allen on 2017/10/23.
- *         异常类型
- */
+
 
 public class ApiException extends Exception {
+
+
+    //对应HTTP的状态码
+    private static final int UNAUTHORIZED = 401;
+    private static final int FORBIDDEN = 403;
+    private static final int NOT_FOUND = 404;
+    private static final int REQUEST_TIMEOUT = 408;
+    private static final int INTERNAL_SERVER_ERROR = 500;
+    private static final int BAD_GATEWAY = 502;
+    private static final int SERVICE_UNAVAILABLE = 503;
+    private static final int GATEWAY_TIMEOUT = 504;
+
+
 
     private final int code;
     private String message;
@@ -42,15 +50,33 @@ public class ApiException extends Exception {
     }
 
     public static ApiException handleException(Throwable e) {
+
+        Throwable throwable = e;
+        //获取最根源的异常
+        while (throwable.getCause() != null) {
+            e = throwable;
+            throwable = throwable.getCause();
+        }
+
         ApiException ex;
-        if (e instanceof HttpException) {
+        if (e instanceof HttpException) {             //HTTP错误
             HttpException httpException = (HttpException) e;
-            ex = new ApiException(httpException, httpException.code());
-            try {
-                ex.message = httpException.response().errorBody().string();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-                ex.message = e1.getMessage();
+            ex = new ApiException(e, httpException.code());
+            switch (httpException.code()) {
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                    //权限错误，需要实现重新登录操作
+//                    onPermissionError(ex);
+                    break;
+                case NOT_FOUND:
+                case REQUEST_TIMEOUT:
+                case GATEWAY_TIMEOUT:
+                case INTERNAL_SERVER_ERROR:
+                case BAD_GATEWAY:
+                case SERVICE_UNAVAILABLE:
+                default:
+                    ex.message = "默认网络异常";  //均视为网络错误
+                    break;
             }
             return ex;
         } else if (e instanceof SocketTimeoutException) {
@@ -139,4 +165,8 @@ public class ApiException extends Exception {
         public static final int ILLEGAL_STATE_ERROR = 1006;
 
     }
+
 }
+
+
+

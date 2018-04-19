@@ -42,9 +42,8 @@ public class ResponseConverterFactory extends Converter.Factory {
         return new GsonResponseBodyConverter<>(gson, type);
     }
 
-    @Override
-    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
-//返回我们自定义的Gson响应体变换器
-        return new GsonResponseBodyConverter<>(gson,type);
-    }
+//    @Override
+//    public Converter<?, RequestBody> requestBodyConverter(Type type, Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
+//        return new GsonResponseBodyConverter<>(gson,type);
+//    }
 }

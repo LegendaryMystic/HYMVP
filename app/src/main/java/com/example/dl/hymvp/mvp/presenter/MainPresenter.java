@@ -64,9 +64,6 @@ public class MainPresenter extends BasePresenter<MainContract.MainView,MainContr
 
 
 
-
-
-
       mModel.getSurvey(did)
                 .compose(RxTransformer.transformWithLoading(mView))
                 .subscribe(new BaseObserver<Survey>() {

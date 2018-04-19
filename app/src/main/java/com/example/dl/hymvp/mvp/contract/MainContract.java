@@ -28,9 +28,9 @@ public interface MainContract {
       Observable<Survey> getSurvey(String did);
     }
 
-//
+
 //    abstract class MainPresenter extends BasePresenter<MainView, MainModel> {
-//        public abstract void getGank();
+//        public abstract void getSurvey(String did);
 //    }
 
 }

@@ -2,10 +2,10 @@ package com.example.dl.hymvp.base;
 
 import android.app.Activity;
 
+
 import com.example.dl.hymvp.util.Preconditions;
 import com.trello.rxlifecycle2.RxLifecycle;
 
-import org.reactivestreams.Subscription;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -73,9 +73,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> implements IP
     }
 
     public void unDispose(){
-        if (mView != null) {
-            mView = null;
-        }
+
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();//保证 Activity 结束时取消所有正在执行的订阅
         }
