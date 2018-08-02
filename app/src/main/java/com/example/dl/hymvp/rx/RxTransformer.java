@@ -62,14 +62,13 @@ public class RxTransformer {
      * @return
      */
     public static <T> ObservableTransformer<T, T> transformWithLoading(final BaseView view) {
+        //隐藏进度条
         return observable -> observable.subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable -> {
                     view.showLoading();//显示进度条
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .doFinally(() -> {
-                    view.hideLoading();//隐藏进度条
-                }).compose(view.bindToLifecycle());
+                .doFinally(view::hideLoading).compose(view.bindToLifecycle());
     }
 
 }

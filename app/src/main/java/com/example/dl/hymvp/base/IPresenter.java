@@ -9,9 +9,10 @@ package com.example.dl.hymvp.base;
  */
 
 
-public interface IPresenter {
+public interface IPresenter<V extends BaseView> {
 
-    void attachView();
+
+    void attachView(V view);
 
     void detachView();
 }
