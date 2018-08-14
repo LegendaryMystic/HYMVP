@@ -30,6 +30,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements IActiv
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         try {
             int layoutResID = initView(savedInstanceState);
             //如果initView返回0,框架则不会调用setContentView(),当然也不会 Bind ButterKnife

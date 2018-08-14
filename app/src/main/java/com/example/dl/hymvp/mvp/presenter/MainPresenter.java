@@ -10,6 +10,8 @@ import com.example.dl.hymvp.mvp.contract.MainContract;
 import com.example.dl.hymvp.mvp.model.MainModel;
 import com.example.dl.hymvp.rx.RxTransformer;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Incremental change is better than ambitious failure.
  *
@@ -64,12 +66,12 @@ public class MainPresenter extends BasePresenter<MainContract.MainView,MainContr
 
 
 
-      mModel.getSurvey(did)
-                .compose(RxTransformer.transformWithLoading(mView))
+       mModel.getSurvey(did)
+                .compose(RxTransformer.transformWithLoading(getView()))
                 .subscribe(new BaseObserver<Survey>() {
                     @Override
                     public void onSuccess(Survey response) {
-                        mView.onGetSurvey(response);
+                        getView().onGetSurvey(response);
                     }
 
                     @Override
@@ -77,5 +79,9 @@ public class MainPresenter extends BasePresenter<MainContract.MainView,MainContr
 
                     }
                 });
+
+
+
+
     }
 }

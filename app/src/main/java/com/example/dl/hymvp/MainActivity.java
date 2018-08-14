@@ -1,9 +1,10 @@
 package com.example.dl.hymvp;
 
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
+
 import android.widget.Toast;
 
 import com.example.dl.hymvp.base.BaseActivity;
@@ -33,7 +34,10 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
 
-        mPresenter.getSurveyList("189ba5a013dc");
+        findViewById(R.id.get).setOnClickListener(v -> {
+            mPresenter.getSurveyList("189ba5a013dc");
+        });
+
     }
 
 
@@ -47,7 +51,6 @@ public class MainActivity extends BaseMvpActivity<MainPresenter> implements Main
 
     @Override
     public void showLoading() {
-
     }
 
     @Override

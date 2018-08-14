@@ -21,7 +21,6 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
 
         mPresenter = createPresenter();
         super.onCreate(savedInstanceState);
-
     }
 
     /**

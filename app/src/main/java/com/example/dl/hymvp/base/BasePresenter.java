@@ -33,6 +33,10 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> implements IP
 
     protected CompositeDisposable mCompositeDisposable;
 
+
+    protected V getView() {
+        return mView.get();
+    }
     /**
      * 如果当前页面同时需要 Model 层和 View 层,则使用此构造函数(默认)
      *
