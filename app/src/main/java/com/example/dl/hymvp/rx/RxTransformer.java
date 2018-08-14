@@ -1,6 +1,7 @@
 package com.example.dl.hymvp.rx;
 
 
+import com.example.dl.hymvp.base.BasePresenter;
 import com.example.dl.hymvp.base.BaseView;
 
 import io.reactivex.Observable;
@@ -70,5 +71,6 @@ public class RxTransformer {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(view::hideLoading).compose(view.bindToLifecycle());
     }
+
 
 }

@@ -1,6 +1,7 @@
 package com.example.dl.hymvp.base;
 
 import android.app.Activity;
+import android.util.Log;
 
 
 import com.example.dl.hymvp.util.Preconditions;
@@ -81,6 +82,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> implements IP
         }
         //将所有 Disposable 放入集中处理
         mCompositeDisposable.add(disposable);
+        Log.d("订阅",mCompositeDisposable.toString()+"个数"+mCompositeDisposable.size());
     }
 
     public void unDispose(){
@@ -105,7 +107,7 @@ public class BasePresenter<V extends BaseView,M extends BaseModel> implements IP
             mView = null;
         }
 
-//        unDispose();//备用方案
+        unDispose();//备用方案
 
     }
 }

@@ -10,7 +10,9 @@ import com.example.dl.hymvp.mvp.contract.MainContract;
 import com.example.dl.hymvp.mvp.model.MainModel;
 import com.example.dl.hymvp.rx.RxTransformer;
 
+import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Incremental change is better than ambitious failure.
@@ -48,14 +50,14 @@ public class MainPresenter extends BasePresenter<MainContract.MainView,MainContr
 
     public void getSurveyList(String did){
 
-        //生命周期管理，备用方案，订阅的时候添加Disposable对象到容器
+//        //生命周期管理，备用方案，订阅的时候添加Disposable对象到容器
 //        mModel.getSurvey(did)
 //                .compose(RxTransformer.transform())
 //                .doOnSubscribe(this::addDisposabel)
 //                .subscribe(new BaseObserver<Survey>() {
 //                    @Override
 //                    public void onSuccess(Survey response) {
-//
+//                        getView().onGetSurvey(response);
 //                    }
 //
 //                    @Override
@@ -63,6 +65,16 @@ public class MainPresenter extends BasePresenter<MainContract.MainView,MainContr
 //
 //                    }
 //                });
+
+
+
+//
+//        Disposable disposable = mModel.getSurvey(did)
+//                .compose(RxTransformer.transformWithLoading(getView()))
+//                .subscribe(survey -> getView().onGetSurvey(survey));
+//
+//        addDisposabel(disposable);
+
 
 
 
